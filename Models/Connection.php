@@ -4,7 +4,7 @@
     private $data = array (
       "host" => "localhost",
       "user" => "root",
-      "pass" => "",
+      "pass" => "olade56",
       "db" => "inventariodb"
     );
     private $con;

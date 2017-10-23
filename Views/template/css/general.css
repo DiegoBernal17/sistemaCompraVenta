@@ -5,17 +5,15 @@ height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-border: 1px solid yellowgreen;
-border-radius: 10px;
+border: 1px solid #83aabd;
 }
 
 ::-webkit-scrollbar-thumb {
-background: yellowgreen;
-border-radius: 10px;
+background: #83aabd;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: #88ba1c;
+background: #5e8496;
 }
 
 input:invalid+span:after {

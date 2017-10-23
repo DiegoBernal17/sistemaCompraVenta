@@ -12,6 +12,9 @@
 		<link rel="stylesheet" href="<?php echo URL; ?>Views/template/css/bootstrap.css">
 		<link rel="stylesheet" href="<?php echo URL; ?>Views/template/css/general.css">
     <link rel="icon" type="image/png" href="<?php echo URL;?>Views/template/favicons/favicon-16x16.png">
+    <script>
+    url = '<?php echo URL;?>';
+    </script>
 	</head>
 	<body>
     <?php if(LOGGED) { ?>
@@ -95,7 +98,7 @@
 ?>
 	<footer class="navbar-fixed-bottom">
 		Todos los derechos reservados &copy 2017 <br>
-		Diego Bernal | <b>Interboard</b>
+		Equipo 7 | <b>Equipo Oracle</b>
 	</footer>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="<?php echo URL; ?>Views/template/js/bootstrap.js"></script>

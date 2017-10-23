@@ -8,8 +8,8 @@ class Empleado {
   private $genero;
   private $telefono;
   private $id_direccion;
-  private $username;
-  private $pass;
+  private $usuario;
+  private $password;
 
   public function __construct() {
     $this->con = new Connection();
@@ -22,9 +22,9 @@ class Empleado {
 
   public function add() {
     $password = password_hash($this->password, PASSWORD_BCRYPT);
-    $sql = "INSERT INTO empleados (id_empleado,nombre,paterno,materno,genero,telefono,id_direccion,username,contraseña)
-            VALUES (null,{$this->nombre},{$this->paterno},{$this->materno},{$this->genero},{$this->telefono},{$this->id_direccion},{$this->username},{$password})";
-    $this->simpleQuery($sql);
+    $sql = "INSERT INTO empleados (id_empleado,nombre,paterno,materno,genero,telefono,id_direccion,usuario,contraseña)
+            VALUES (NULL, '{$this->nombre}', '{$this->paterno}', '{$this->materno}', '{$this->genero}', '{$this->telefono}', '{$this->id_direccion}', '{$this->usuario}', '{$password}')";
+    $this->con->simpleQuery($sql);
   }
 
   public function viewSales() {
@@ -71,11 +71,20 @@ class Empleado {
       print "No existe usuario<br>";
       return false;
     }
-    if(password_verify($this->pass, $data['contraseña'])) {
+    if(password_verify($this->password, $data['contraseña'])) {
       $_SESSION['USER_ID'] = $data['id_empleado'];
       return true;
     }
     return false;
+  }
+
+  public function availableUsername() {
+    $sql = "SELECT username FROM empleados WHERE username = '{$this->username}'";
+    $result = $this->con->returnQuery($sql);
+    $value = mysqli_num_rows($result);
+    if($value > 0)
+      return false;
+    return true;
   }
 }
 ?>

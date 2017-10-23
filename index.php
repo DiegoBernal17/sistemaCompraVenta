@@ -10,12 +10,6 @@
   define('USERNAME', $_SESSION['LOGGED']);
   define('ID_EMPLEADO', $_SESSION['USER_ID']);
 
-  ?>
-  <script>
-  url = '<?php echo URL;?>';
-  </script>
-  <?php
-
   require_once "Config/Autoload.php";
   Config\Autoload::run();
   require_once "Views/template.php";
