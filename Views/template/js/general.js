@@ -23,6 +23,18 @@ var addItem = function () {
     }
 };
 
+var addItem2 = function() {
+    addItem();
+    var size = parseInt($("#myItemsPrice").attr("size"))+1;
+    var price = $("#ItemCountBuy").val();
+
+    $("#myItemsPrice").attr("size", size);
+    var itemVal = $("#allItems").val();
+    $("#myItemsPrice").append('<option class="myItemsPrice'+(size-2)+'" value="'+price+'">$'+price+'</option>');
+    var itemsTotal = parseInt($("#itemsTotal").val())+1;
+    $("#itemsTotal").attr("value", itemsTotal);
+}
+
 var amount = 0;
 var iva;
 
@@ -50,6 +62,10 @@ var hiddeConfirmSaleDialog = function() {
     $("#confirmSale").attr("style", "");
 };
 
+var hiddeConfirmBuyDialog = function() {
+    $("#confirmBuy").attr("style", "");
+};
+
 var addSale = function () {
   $.cliente_id = $("#cid").val();
   $.empleado_id = $("#eid").val();
@@ -75,13 +91,12 @@ var addSale = function () {
       var items = $("select#myItems option").length;
       $("#confirmBuy").attr("style", "display:block");
       $("#itemsTotalBuy").text(items);
-
       var str,str2;
       amount=0;
       for(var i=0; i<items; i++) {
-          str = $(".myItem"+i).text();
+          str = $(".myItemsPrice"+i).text();
           str2 = str.split("$");
-          amount += parseInt(str2[1])
+          amount += parseInt(str2[1]);
       }
       $("#amount").text(amount);
       total = amount+parseInt(iva);
@@ -99,7 +114,7 @@ var addSale = function () {
     var prices = [];
     for(var i=0; i<$("select#myItemsPrice option").length; i++)
     {
-      prices.push($(".myItemPrice"+i).val());
+      prices.push($(".myItemsPrice"+i).val());
     }
 
     $.articulos = $("myItems").html();

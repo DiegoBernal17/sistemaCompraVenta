@@ -87,6 +87,7 @@
   		            <li><a href="<?php echo URL; ?>index/out">Salir</a></li>
               </ul>
             </li>
+          </ul>
 		    </div>
 		  </div>
 		</nav>

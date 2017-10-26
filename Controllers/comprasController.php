@@ -26,7 +26,7 @@ class comprasController {
   }
 
   public function addItems($id) {
-    echo '<input type="hidden" id="eid" value="'.$id.'">';
+    echo '<input type="hidden" id="pid" value="'.$id.'">';
     echo '<input type="hidden" id="eid" value="'.ID_EMPLEADO.'">';
     $articulo = new Articulo();
     return $articulo->toList2();

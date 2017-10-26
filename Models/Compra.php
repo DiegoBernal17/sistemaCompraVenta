@@ -30,7 +30,7 @@ class Compra {
     $sql = "INSERT INTO comprasarticulos (id_compraArticulo,id_articulo,id_compra, precio_compra)
             VALUES (NULL, '{$id_articulo}', '{$this->id_compra}', '{$precio_compra}')";
     $this->con->simpleQuery($sql);
-    $this->con->simpleQuery("UPDATE articulos SET disponibles = (disponibles-1) WHERE id_articulo = {$id_articulo}");
+    $this->con->simpleQuery("UPDATE articulos SET disponibles = (disponibles+1) WHERE id_articulo = {$id_articulo}");
   }
 
   public function viewProviders() {

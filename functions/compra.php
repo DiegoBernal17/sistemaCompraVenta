@@ -14,7 +14,7 @@ $compra->add();
 
 $items = $_POST['items'];
 $itemsPrice = $_POST['precio_compra'];
-for($i=0; $i<count($items);$i++) {
+for($i=0; $i<count($items); $i++) {
   $compra->addItem($items[$i], $itemsPrice[$i]);
 }
  ?>

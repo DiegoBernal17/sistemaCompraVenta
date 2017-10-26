@@ -14,13 +14,14 @@ echo $_GET['id'] ?>
 	  		<div class="col-sm-10">
 	  		   <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 						 <div class="form-group">
-							 <select name="allItems" class="form-control" id="allItems" style="width: 70%; display: inline-block;">
+							 <select name="allItems" class="form-control" id="allItems" style="width: 56%; display: inline-block;">
 									 <?php while($row = mysqli_fetch_array($data)) { ?>
-										 <option id="it<?php echo $row['id_articulo']; ?>" value="<?php echo $row['id_articulo']; ?>"><?php echo $row['nombre']." $".$row['precio_venta']; ?></option>
+										 <option id="it<?php echo $row['id_articulo']; ?>" value="<?php echo $row['id_articulo']; ?>"><?php echo $row['nombre']; ?></option>
 										 <?php } ?>
 								</select>
+								$<input type="num" id="ItemCountBuy" value="1" style="width: 36px">
 								<a id="countItem" class="btn btn-default disabled">1</a>
-								<a class="btn btn-success" id="addItem" onclick="addItem()">+</a>
+								<a class="btn btn-success" id="addItem" onclick="addItem2()">+</a>
 							</div>
 						 <hr>
              Articulos en espera de compra:
@@ -46,7 +47,7 @@ echo $_GET['id'] ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="hiddeConfirmSaleDialog();">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="hiddeConfirmBuyDialog();">&times;</button>
         <h4 class="modal-title">Confirmar venta</h4>
       </div>
       <div class="modal-body">
