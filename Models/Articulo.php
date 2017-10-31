@@ -26,6 +26,17 @@ class Articulo {
     $this->con->simpleQuery($sql);
   }
 
+  public function view() {
+    $sql = "SELECT * FROM articulos WHERE id_articulo = '{$this->id_articulo}'";
+    return mysqli_fetch_array($this->con->returnQuery($sql));
+  }
+
+  public function update() {
+    $sql = "UPDATE FROM articulos SET nombre = '{$this->nombre}', precio_venta = {$this->precio_venta}
+            WHERE id_articulo = '{$this->id_articulo}'";
+    $this->con->simpleQuery($sql);
+  }
+
   public function set($attribute, $content) {
       $this->$attribute = $content;
   }

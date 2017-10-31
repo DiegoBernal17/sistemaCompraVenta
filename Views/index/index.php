@@ -13,6 +13,7 @@
        <div class="preloader_image">
            </div>
        </div>
+       Por favor selecciona una opción del menú para continuar.
      <?php } else { ?>
        <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
          <fieldset>
