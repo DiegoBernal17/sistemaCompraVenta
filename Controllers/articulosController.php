@@ -24,4 +24,18 @@ class articulosController {
       </div>';
     }
   }
+
+  public function edit($id) {
+    if($_POST) {
+      $this->articulo->set("nombre", $_POST['nombre']);
+      $this->articulo->set("precio_venta", $_POST['precio']);
+      $this->articulo->update();
+      echo '<div class="alert alert-dismissible alert-success psmall">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>¡Hecho!</strong> Se ha editado un articulo.
+      </div>';
+    }
+    $this->articulo->set("id_articulo", $id);
+    return $this->articulo->view();
+  }
 }

@@ -3,10 +3,6 @@
 	<div class="panel panel-<?php if($data['genero'] == 'M') echo 'primary'; else echo 'info'; ?> psmall">
 	  <div class="panel-heading">
       <div class="panel-title">
-        <div class="actionButtons">
-          <a href="" class="btn btn-warning btn-xs">Editar</a>
-          <a href="" class="btn btn-danger btn-xs">Borrar</a>
-        </div>
       </div>
 	  </div>
 	  <div class="panel-body">
