@@ -32,7 +32,11 @@ class Articulo {
   }
 
   public function update() {
+<<<<<<< HEAD
     $sql = "UPDATE articulos SET nombre = '{$this->nombre}', precio_venta = '{$this->precio_venta}'
+=======
+    $sql = "UPDATE FROM articulos SET nombre = '{$this->nombre}', precio_venta = {$this->precio_venta}
+>>>>>>> d33634a8b9718bd8879fde75dabe8bb8df0b64ba
             WHERE id_articulo = '{$this->id_articulo}'";
     $this->con->simpleQuery($sql);
   }
