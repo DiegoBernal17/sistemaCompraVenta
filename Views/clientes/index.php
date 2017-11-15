@@ -22,10 +22,12 @@
                 <td><?php echo $row['id_cliente']; ?></td>
                 <td><?php echo $row['nombre']." ".$row['paterno']." ".$row['materno']; ?></td>
                 <td><?php echo $row['telefono']; ?></td>
-                <td><?php echo $row['id_direccion']; ?></td>
+                <td>
+                  Calle <?php echo $row['calle']." #".$row['numero']." Col. ".$row['colonia_nombre']; ?><br>
+                  <?php echo $row['ciudad_nombre'].", ".$row['estado_nombre'].", ".$row['pais_nombre'] ?>
+                </td>
                 <td>
                   <a class="btn btn-success btn-sm" href="<?php echo URL; ?>clientes/view/<?php echo $row['id_cliente']; ?>">Ver</a>
-                  <a class="btn btn-warning btn-sm" href="<?php echo URL; ?>clientes/edit/<?php echo $row['id_cliente']; ?>">Editar</a>
                 </td>
               </tr>
             <?php } ?>

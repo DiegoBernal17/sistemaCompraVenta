@@ -10,8 +10,8 @@
           <tr>
             <th>No.</th>
             <th>Nombre</th>
-            <th>Dirección</th>
             <th>Telefono</th>
+            <th>Dirección</th>
             <th></th>
           </tr>
         </thead>
@@ -21,8 +21,11 @@
               <tr>
                 <td><?php echo $row['id_proveedor']; ?></td>
                 <td><?php echo $row['nombre']; ?></td>
-                <td><?php echo $row['id_direccion']; ?></td>
                 <td><?php echo $row['telefono']; ?></td>
+                <td>
+                  Calle <?php echo $row['calle']." #".$row['numero']." Col. ".$row['colonia_nombre']; ?><br>
+                  <?php echo $row['ciudad_nombre'].", ".$row['estado_nombre'].", ".$row['pais_nombre'] ?>
+                </td>
                 <th><a class="btn btn-success btn-sm" href="<?php echo URL; ?>proveedores/view/<?php echo $row['id_proveedor']; ?>">Ver</a></th>
               </tr>
             <?php } ?>

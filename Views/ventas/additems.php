@@ -13,13 +13,14 @@ $id = explode("/",  $_SERVER["REQUEST_URI"]); ?>
 	  		<div class="col-sm-10">
 	  		   <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 						 <div class="form-group">
+							 <div style="text-align: right; margin-right: 38px">Disponibles</div>
 							 <select name="allItems" class="form-control" id="allItems" style="width: 70%; display: inline-block;">
 									 <?php
 									  while($row = mysqli_fetch_array($data)) { ?>
-										 <option id="it<?php echo $row['id_articulo']; ?>" value="<?php echo $row['id_articulo']; ?>"><?php echo $row['nombre']." $".$row['precio_venta']; ?></option>
+										 <option id="it<?php echo $row['id_articulo']; ?>" value="<?php echo $row['id_articulo']; ?>" onclick="updateItem()"><?php echo $row['nombre']." $".$row['precio_venta']; ?></option>
 										 <?php } ?>
 								</select>
-								<a id="countItem" class="btn btn-default disabled">1</a>
+								<a id="countItem" class="btn btn-default disabled">?</a>
 								<a class="btn btn-success" id="addItem" onclick="addItem()">+</a>
 							</div>
 						 <hr>

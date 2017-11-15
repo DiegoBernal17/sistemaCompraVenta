@@ -34,6 +34,8 @@
       $sql = "INSERT INTO ventasarticulos (id_ventaArticulo,id_articulo,id_venta)
               VALUES (NULL, '{$id_articulo}', '{$this->id_venta}')";
       $this->con->simpleQuery($sql);
+      $sql2 = "UPDATE articulos SET disponibles = (disponibles-1) WHERE id_articulo = '{$id_articulo}'";
+      $this->con->simpleQuery($sql2);
     }
 
 /*

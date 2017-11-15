@@ -27,17 +27,18 @@
              <label for="inputPassword" class="col-lg-2 control-label"></label>
              <div class="col-lg-10">
                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+               <!--
                <div class="checkbox">
                  <label>
                    <input type="checkbox"> No cerrrar sesión
                  </label>
                </div>
+                -->
              </div>
            </div>
            <div class="form-group">
              <div class="col-lg-10 col-lg-offset-2">
-               <button type="submit" class="btn btn-primary">Conectarse</button>
-               <a href="<?php echo URL; ?>index/register" class="btn btn-success">Registrarse</a>
+               <button type="submit" class="btn btn-primary">Iniciar sesión</button>
              </div>
            </div>
          </fieldset>

@@ -39,7 +39,8 @@
                 <li><a href="<?php echo URL; ?>ventas/selectClient">Nueva venta</a></li>
                 <li><a href="<?php echo URL; ?>ventas/">Ver todas</a></li>
                 <li><a href="<?php echo URL; ?>ventas/periodo">Ver por periodo</a></li>
-                <li><a href="<?php echo URL; ?>ventas/cliente/">Compras de un cliente</a></li>
+                <li><a href="<?php echo URL; ?>empleados/ventas/">De un empleado</a></li>
+                <li><a href="<?php echo URL; ?>ventas/cliente">Compras de un cliente</a></li>
 		          </ul>
 		        </li>
             <li class="dropdown">
@@ -77,6 +78,7 @@
             <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Empleados <span class="caret"></span></a>
 		          <ul class="dropdown-menu" role="menu">
+                <?php if(ADMIN==1) { ?><li><a href="<?php echo URL; ?>empleados/add">Nuevo empleados</a></li><?php } ?>
 		            <li><a href="<?php echo URL; ?>empleados/">Ver empleados</a></li>
                 <li><a href="<?php echo URL; ?>empleados/ventas">Ventas realizadas</a></li>
 		          </ul>
@@ -101,7 +103,7 @@
 		Todos los derechos reservados &copy 2017 <br>
 		Equipo 7 | <b>Equipo Oracle</b>
 	</footer>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="<?php echo URL; ?>Views/template/js/jquery-1.11.3.min.js"></script>
 	<script src="<?php echo URL; ?>Views/template/js/bootstrap.js"></script>
   <script src="<?php echo URL; ?>Views/template/js/jquery-3.2.1.js"></script>
   <script src="<?php echo URL; ?>Views/template/js/general.js"></script>

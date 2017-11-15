@@ -18,6 +18,9 @@
           <div class="well well-sm">
             <b>Apellido materno:</b> <?php echo $data['materno']; ?>
           </div>
+					<div class="well well-sm">
+				  	<b>Sexo:</b>  <?php if($data['genero'] == 'M') echo "Masculino"; else echo "Femenino"; ?>
+          </div>
           <div class="well well-sm">
             <b>Dirección:</b><br>
               Calle <?php echo $data['calle']." #".$data['numero']." Col. ".$data['colonia_nombre']; ?><br>

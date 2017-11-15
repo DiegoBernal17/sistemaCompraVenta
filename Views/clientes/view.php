@@ -10,13 +10,16 @@
 	  		<div class="col-xs-1"></div>
 	  		<div class="col-sm-10">
           <div class="well well-sm">
-				        <b>Nombre:</b>  <?php echo $data['nombre']; ?>
+				  	<b>Nombre:</b>  <?php echo $data['nombre']; ?>
           </div>
           <div class="well well-sm">
             <b>Apellido paterno:</b>  <?php echo $data['paterno']; ?>
           </div>
           <div class="well well-sm">
             <b>Apellido materno:</b> <?php echo $data['materno']; ?>
+          </div>
+					<div class="well well-sm">
+            <b>Sexo:</b> <?php if($data['genero'] == 'M') echo "Masculino"; else echo "Femenino"; ?>
           </div>
           <div class="well well-sm">
             <b>Dirección:</b><br>

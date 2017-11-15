@@ -27,6 +27,11 @@ class Direccion {
     return $this->con->returnQuery($sql);
   }
 
+  public function view() {
+    $sql = "SELECT * FROM direcciones WHERE id_direccion = '{$this->id_direccion}'";
+    return $this->con->mysqli_fetch_array($sql);
+  }
+
   public function set($attribute, $content) {
       $this->$attribute = $content;
   }

@@ -16,6 +16,7 @@ var addItem = function () {
       $("#myItems").append('<option class="myItem'+(size-2)+'" value="'+itemVal+'">'+itemText+'</option>');
       var itemsTotal = parseInt($("#itemsTotal").val())+1;
       $("#itemsTotal").attr("value", itemsTotal);
+      updateItem();
 
       if(size == 2) {
         $("#startSale").attr("onclick","confirmSale();");
@@ -23,8 +24,36 @@ var addItem = function () {
     }
 };
 
+var updateItem = function () {
+    var item_id = $("#allItems").val();
+
+    $.post(url+"functions/countItems.php", { id_articulo: item_id })
+      .done(function( data ) {
+        $("#countItem").text(data);
+      });
+}
+
 var addItem2 = function() {
     addItem();
+    var size = parseInt($("#myItemsPrice").attr("size"))+1;
+    var price = $("#ItemCountBuy").val();
+
+    $("#myItemsPrice").attr("size", size);
+    var itemVal = $("#allItems").val();
+    $("#myItemsPrice").append('<option class="myItemsPrice'+(size-2)+'" value="'+price+'">$'+price+'</option>');
+    var itemsTotal = parseInt($("#itemsTotal").val())+1;
+    $("#itemsTotal").attr("value", itemsTotal);
+}
+
+var addItem3 = function() {
+    var size = parseInt($("#myItems").attr("size"))+1;
+    $("#myItems").attr("size", size);
+    var itemVal = 0;
+    var itemText = $("#newItemName").val();
+    $("#myItems").append('<option class="myItem'+(size-2)+'" value="'+itemVal+'">'+itemText+'</option>');
+    var itemsTotal = parseInt($("#itemsTotal").val())+1;
+    $("#itemsTotal").attr("value", itemsTotal);
+
     var size = parseInt($("#myItemsPrice").attr("size"))+1;
     var price = $("#ItemCountBuy").val();
 
@@ -135,16 +164,7 @@ var showStates = function() {
         $("#estado").html(data);
       });
     $("#estado").attr("style", "");
-  } else {
-    $("#estado").attr("style", "display: none");
   }
-  $("#pais").change(function() {
-    $("#ciudad").attr("style", "display: none");
-    $("#colonia").attr("style", "display: none");
-    $("#calle").attr("style", "display: none");
-    $("#number").attr("style", "display: none");
-    $("#number2").attr("style", "display: none");
-  });
 }
 
 var showCities = function() {
@@ -157,12 +177,6 @@ var showCities = function() {
       });
     $("#ciudad").attr("style", "");
   }
-  $("#estado").change(function() {
-    $("#colonia").attr("style", "display: none");
-    $("#calle").attr("style", "display: none");
-    $("#number").attr("style", "display: none");
-    $("#number2").attr("style", "display: none");
-  });
 }
 
 var showColonies = function() {
@@ -177,11 +191,6 @@ var showColonies = function() {
       });
     $("#colonia").attr("style", "");
   }
-  $("#colonia").change(function() {
-    $("#calle").attr("style", "display: none");
-    $("#number").attr("style", "display: none");
-    $("#number2").attr("style", "display: none");
-  });
 }
 
 var showNumber = function() {
@@ -197,4 +206,22 @@ var clearDir = function() {
   $("#calle").attr("style", "display: none");
   $("#number").attr("style", "display: none");
   $("#number2").attr("style", "display: none");
+}
+
+var addNewItem = function() {
+  $("#allItems").attr("style", "display: none");
+  $("#newItemName").attr("style", "");
+  $("#addItem").attr("style", "display: none");
+  $("#addItem2").attr("style", "");
+  $("#addNewItem").attr("style", "display: none");
+  $("#viewAllItems").attr("style", "");
+}
+
+var viewAllItems = function() {
+  $("#allItems").attr("style", "");
+  $("#newItemName").attr("style", "display: none");
+  $("#addItem").attr("style", "");
+  $("#addItem2").attr("style", "display: none");
+  $("#addNewItem").attr("style", "");
+  $("#viewAllItems").attr("style", "display: none");
 }

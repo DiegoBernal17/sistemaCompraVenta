@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 20-10-2017 a las 09:29:01
+-- Tiempo de generación: 05-11-2017 a las 21:22:46
 -- Versión del servidor: 5.6.36
 -- Versión de PHP: 5.6.31
 
@@ -40,9 +40,8 @@ CREATE TABLE `articulos` (
 --
 
 INSERT INTO `articulos` (`id_articulo`, `nombre`, `precio_venta`, `disponibles`) VALUES
-(1, 'Pan', 4, 5),
-(2, 'Botella de agua', 10, 2),
-(3, 'Galletas', 10, 0);
+(1, 'Pan', 4, 4),
+(2, 'Botella de agua', 10, 17);
 
 -- --------------------------------------------------------
 
@@ -133,7 +132,7 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`id_compra`, `id_proveedor`, `id_empleado`, `fecha`, `importe`, `iva`) VALUES
-(1, 1, 1, '2017-10-11', 100, 12);
+(1, 1, 1, '2017-10-25', 20, 0);
 
 -- --------------------------------------------------------
 
@@ -153,7 +152,7 @@ CREATE TABLE `comprasarticulos` (
 --
 
 INSERT INTO `comprasarticulos` (`id_compraArticulo`, `id_articulo`, `id_compra`, `precio_compra`) VALUES
-(1, 1, 1, 2);
+(1, 2, 1, 10);
 
 -- --------------------------------------------------------
 
@@ -169,7 +168,7 @@ CREATE TABLE `direcciones` (
   `id_colonia` char(4) NOT NULL,
   `calle` varchar(30) NOT NULL,
   `numero` varchar(5) NOT NULL,
-  `interior` varchar(2) DEFAULT NULL
+  `interior` varchar(2) DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de direcciones';
 
 --
@@ -200,14 +199,14 @@ CREATE TABLE `empleados` (
   `telefono` varchar(15) NOT NULL,
   `id_direccion` int(10) NOT NULL,
   `usuario` varchar(40) NOT NULL,
-  `contraseña` varchar(100) NOT NULL
+  `contrasena` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id_empleado`, `nombre`, `paterno`, `materno`, `genero`, `telefono`, `id_direccion`, `usuario`, `contraseña`) VALUES
+INSERT INTO `empleados` (`id_empleado`, `nombre`, `paterno`, `materno`, `genero`, `telefono`, `id_direccion`, `usuario`, `contrasena`) VALUES
 (1, 'Diego', 'Padilla', 'Bernal', 'M', '8442831681', 7, 'dbernal', '$2y$10$P1XFvSVAe/hriRqxQ5lQJe.g2flkUpuFDAMF6kXC6Psafh8hfhPAC'),
 (2, 'Pedro', 'Palacios', 'Martinez', 'M', '844123123', 1, '', ''),
 (3, 'Alicia', 'Salas', 'Bustos', 'F', '8441234567', 1, 'usuario', '$2y$10$1wCWtKc0q9aUd/gDidDhI.41CEAM/WQZKxQOgK3YdJ/xTaKl3peHK');
@@ -241,6 +240,7 @@ INSERT INTO `estados` (`id_pais`, `id_estado`, `nombre`) VALUES
 
 CREATE TABLE `paises` (
   `id_pais` char(4) NOT NULL,
+  `codigo` varchar(2) NOT NULL,
   `nombre` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de paises';
 
@@ -248,9 +248,9 @@ CREATE TABLE `paises` (
 -- Volcado de datos para la tabla `paises`
 --
 
-INSERT INTO `paises` (`id_pais`, `nombre`) VALUES
-('1', 'México'),
-('2', 'Estados Unidos');
+INSERT INTO `paises` (`id_pais`, `codigo`, `nombre`) VALUES
+('1', '', 'México'),
+('2', '', 'Estados Unidos');
 
 -- --------------------------------------------------------
 
@@ -424,7 +424,7 @@ ALTER TABLE `ventasarticulos`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
@@ -444,12 +444,12 @@ ALTER TABLE `comprasarticulos`
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --

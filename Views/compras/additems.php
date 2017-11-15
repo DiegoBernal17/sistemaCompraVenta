@@ -14,14 +14,19 @@ echo $_GET['id'] ?>
 	  		<div class="col-sm-10">
 	  		   <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
 						 <div class="form-group">
-							 <select name="allItems" class="form-control" id="allItems" style="width: 56%; display: inline-block;">
+							 <div style="text-align: right; margin-right: 46px">$$ compra | Agregar </div>
+							 <select name="allItems" class="form-control items" id="allItems" style="">
 									 <?php while($row = mysqli_fetch_array($data)) { ?>
 										 <option id="it<?php echo $row['id_articulo']; ?>" value="<?php echo $row['id_articulo']; ?>"><?php echo $row['nombre']; ?></option>
 										 <?php } ?>
 								</select>
+								<input type="text" id="newItemName" class="items" placeholder="Nombre articulo" style="display: none">
 								$<input type="num" id="ItemCountBuy" value="1" style="width: 36px">
-								<a id="countItem" class="btn btn-default disabled">1</a>
+								<a id="countAddItem" class="btn btn-default disabled">1</a>
 								<a class="btn btn-success" id="addItem" onclick="addItem2()">+</a>
+								<a class="btn btn-success" id="addItem2" onclick="addItem3()" style="display: none">+</a>
+								<a id="addNewItem" href="#" onclick="addNewItem();">Agregar artículo nuevo</a>
+								<a id="viewAllItems" href="#" onclick="viewAllItems();" style="display: none">Ver articulos registrados</a>
 							</div>
 						 <hr>
              Articulos en espera de compra:

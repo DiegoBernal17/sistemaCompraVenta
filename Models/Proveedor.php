@@ -15,7 +15,13 @@ class Proveedor {
   }
 
   public function toList() {
-    $sql = "SELECT * FROM proveedores";
+    $sql = "SELECT pr.*, d.*, p.nombre AS pais_nombre, e.nombre AS estado_nombre, c.nombre AS ciudad_nombre, col.nombre AS colonia_nombre
+            FROM proveedores pr
+            INNER JOIN direcciones d ON d.id_direccion = pr.id_direccion
+            INNER JOIN colonias col ON col.id_pais = d.id_pais AND col.id_estado = d.id_estado AND col.id_ciudad = d.id_ciudad AND col.id_colonia = d.id_colonia
+            INNER JOIN ciudades c ON c.id_pais = col.id_pais AND c.id_estado = col.id_estado AND c.id_ciudad = col.id_ciudad
+            INNER JOIN estados e ON e.id_pais = c.id_pais AND e.id_estado = c.id_estado
+            INNER JOIN paises p ON p.id_pais = e.id_pais";
     return $this->con->returnQuery($sql);
   }
 

@@ -9,6 +9,7 @@
   define('LOGGED', isset($_SESSION['LOGGED']));
   define('USERNAME', $_SESSION['LOGGED']);
   define('ID_EMPLEADO', $_SESSION['USER_ID']);
+  define('ADMIN', $_SESSION['ADMIN']);
 
   require_once "Config/Autoload.php";
   Config\Autoload::run();

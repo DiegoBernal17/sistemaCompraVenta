@@ -18,7 +18,8 @@
 				    <div class="form-group">
 				    	 <button type="submit" class="btn btn-success">Agregar</button>
 				       <button type="reset" class="btn btn-warning">Limpiar</button>
-				    </div>
+				    </div><br>
+						<p><b>Nota:</b> Al agregar un articulo nuevo no se mostrará en las ventas hasta comprar a proveedores ese articulo</p>
 				</form>
 	  		</div>
 	  		<div class="col-xs-1"></div>

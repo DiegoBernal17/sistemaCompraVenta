@@ -1,6 +1,6 @@
 <?php if(ADMIN){ ?>
 <div class="box-principal">
-<h3 class="titulo">Registrarse<hr></h3>
+<h3 class="titulo">Registrar empleado<hr></h3>
 	<div class="panel panel-default psmall">
 	  <div class="panel-heading">
 	    <h3 class="panel-title"></h3>
@@ -28,7 +28,7 @@
 				      <label class="control-label">Fecha nacimiento</label>
 				        <input class="form-control" name="birth_day" type="date" required>
 				    </div> -->
-            <div class="form-group">
+            <div class="form-group" style="background-color: #FFEFFF; border: #FFEFF1 solid 2px">
 				    		<label class="control-label">Dirección:</label>
 								<select id="pais" name="pais" class="form-control" required onclick="showStates();">
 	                  <option value="">País</option>
@@ -36,18 +36,18 @@
 											 echo '<option value="'.$row['id_pais'].'">'.$row['nombre'].'</option>';
 										} ?>
 	              </select>
-								<select id="estado" name="estado" class="form-control" style="display: none" required onclick="showCities();">
+								<select id="estado" name="estado" class="form-control" required onclick="showCities();">
 	                  <option value="">Estado</option>
 	              </select>
-								<select id="ciudad" name="ciudad" class="form-control" style="display: none" required onclick="showColonies();">
+								<select id="ciudad" name="ciudad" class="form-control" required onclick="showColonies();">
 	                  <option value="">Ciudad</option>
 	              </select>
-								<select id="colonia" name="colonia" class="form-control" style="display: none" required onclick="showNumber();">
+								<select id="colonia" name="colonia" class="form-control" required onclick="showNumber();">
 	                  <option value="">Colonia</option>
 	              </select>
-								<input id="calle" class="form-control" name="calle" type="text" placeholder="Calle" style="display: none" required>
-                <input id="number" class="form-control" name="numero" type="text" placeholder="Numero" style="display: none" required>
-								<input id="number2" class="form-control" name="interior" type="text" placeholder="Interior (Opcional)" style="display: none">
+								<input id="calle" class="form-control" name="calle" type="text" placeholder="Calle" required>
+                <input id="number" class="form-control" name="numero" type="text" placeholder="Numero" required>
+								<input id="number2" class="form-control" name="interior" type="text" placeholder="Interior (Opcional)">
 				    </div>
             <div class="form-group">
               <input class="form-control" name="username" type="text" placeholder="Nombre de usuario" required>

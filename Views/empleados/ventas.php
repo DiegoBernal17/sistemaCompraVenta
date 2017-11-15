@@ -1,7 +1,7 @@
 <div class="box-principal">
 <?php
 if(!empty($data['id'])) { ?>
-  <h3 class="titulo">Ventas de <?php echo "Bernal"; ?><hr></h3>
+  <h3 class="titulo">Ventas de un empleado<hr></h3>
    	<div class="panel panel-primary">
    	  <div class="panel-heading">
    	    <h3 class="panel-title"></h3>
