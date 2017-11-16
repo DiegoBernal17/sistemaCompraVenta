@@ -11,8 +11,13 @@
   define('ID_EMPLEADO', $_SESSION['USER_ID']);
   define('ADMIN', $_SESSION['ADMIN']);
 
+  if(!LOGGED AND URL != ("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'])) {
+    header('location: '.URL);
+  }
+
   require_once "Config/Autoload.php";
   Config\Autoload::run();
   require_once "Views/template.php";
   Config\Router::run(new Config\Request());
+
  ?>

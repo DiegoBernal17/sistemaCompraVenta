@@ -19,7 +19,8 @@
                      e.nombre as e_nombre, e.paterno as e_paterno, e.materno as e_materno
               FROM ventas v
               INNER JOIN empleados e ON v.id_empleado = e.id_empleado
-              INNER JOIN clientes c ON v.id_cliente = c.id_cliente ";
+              INNER JOIN clientes c ON v.id_cliente = c.id_cliente
+              ORDER BY v.id_venta DESC";
       return $this->con->returnQuery($sql);
     }
 
@@ -31,11 +32,16 @@
     }
 
     public function addItem($id_articulo) {
-      $sql = "INSERT INTO ventasarticulos (id_ventaArticulo,id_articulo,id_venta)
-              VALUES (NULL, '{$id_articulo}', '{$this->id_venta}')";
-      $this->con->simpleQuery($sql);
-      $sql2 = "UPDATE articulos SET disponibles = (disponibles-1) WHERE id_articulo = '{$id_articulo}'";
-      $this->con->simpleQuery($sql2);
+      $sql = $this->con->returnQuery("SELECT disponibles FROM articulos WHERE id_articulo = '{$id_articulo}'");
+      $itemCount = mysqli_fetch_array($sql);
+
+      if($itemCount[0] > 0) {
+        $sql = "INSERT INTO ventasarticulos (id_ventaArticulo,id_articulo,id_venta)
+                VALUES (NULL, '{$id_articulo}', '{$this->id_venta}')";
+        $this->con->simpleQuery($sql);
+        $sql2 = "UPDATE articulos SET disponibles = (disponibles-1) WHERE id_articulo = '{$id_articulo}'";
+        $this->con->simpleQuery($sql2);
+      }
     }
 
 /*

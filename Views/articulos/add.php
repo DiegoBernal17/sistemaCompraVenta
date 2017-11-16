@@ -14,6 +14,12 @@
 				      <input class="form-control" name="nombre" type="text">
               Precio de venta:
               <input class="form-control" name="precio" type="text">
+							Proveedor del articulo:
+							<select name="proveedor" class="form-control">
+								<?php while($row = mysqli_fetch_array($data)) { ?>
+								<option value="<?php echo $row['id_proveedor']; ?>"><?php echo $row['nombre']; ?></option>
+								<?php } ?>
+							</select>
             </div>
 				    <div class="form-group">
 				    	 <button type="submit" class="btn btn-success">Agregar</button>

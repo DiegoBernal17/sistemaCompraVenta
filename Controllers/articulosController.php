@@ -1,6 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Articulo as Articulo;
+use Models\Proveedor as Proveedor;
 
 class articulosController {
   private $articulo;
@@ -14,6 +15,7 @@ class articulosController {
   }
 
   public function add() {
+    $proveedor = new Proveedor();
     if($_POST) {
       $this->articulo->set("nombre", $_POST['nombre']);
       $this->articulo->set("precio_venta", $_POST['precio']);
@@ -23,32 +25,21 @@ class articulosController {
       <strong>¡Hecho!</strong> Haz agregado un nuevo articulo.
       </div>';
     }
+    return $proveedor->toList();
   }
 
   public function edit($id) {
-<<<<<<< HEAD
     $this->articulo->set("id_articulo", $id);
     if($_POST) {
-      $this->articulo->get("id_articulo");
-=======
-    if($_POST) {
->>>>>>> d33634a8b9718bd8879fde75dabe8bb8df0b64ba
       $this->articulo->set("nombre", $_POST['nombre']);
       $this->articulo->set("precio_venta", $_POST['precio']);
       $this->articulo->update();
       echo '<div class="alert alert-dismissible alert-success psmall">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-<<<<<<< HEAD
       <strong>¡Hecho!</strong> Se ha editado un articulo.<br>
       Haz <a href="'.URL.'articulos/">Clic Aquí</a> para regresar a los articulos.
       </div>';
     }
-=======
-      <strong>¡Hecho!</strong> Se ha editado un articulo.
-      </div>';
-    }
-    $this->articulo->set("id_articulo", $id);
->>>>>>> d33634a8b9718bd8879fde75dabe8bb8df0b64ba
     return $this->articulo->view();
   }
 }

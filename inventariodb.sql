@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-11-2017 a las 21:22:46
+-- Tiempo de generación: 15-11-2017 a las 21:47:12
 -- Versión del servidor: 5.6.36
 -- Versión de PHP: 5.6.31
 
@@ -30,18 +30,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `articulos` (
   `id_articulo` int(11) NOT NULL,
-  `nombre` varchar(40) NOT NULL,
+  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL,
   `precio_venta` double NOT NULL,
-  `disponibles` int(3) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `disponibles` int(3) NOT NULL DEFAULT '0',
+  `id_proveedor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `articulos`
 --
 
-INSERT INTO `articulos` (`id_articulo`, `nombre`, `precio_venta`, `disponibles`) VALUES
-(1, 'Pan', 4, 4),
-(2, 'Botella de agua', 10, 17);
+INSERT INTO `articulos` (`id_articulo`, `nombre`, `precio_venta`, `disponibles`, `id_proveedor`) VALUES
+(1, 'Pan', 4, 0, 2),
+(2, 'Botella de agua', 10, 9, 1),
+(3, 'Coca Cola', 9, 2, 1),
+(4, 'Jugo de naranja', 8, 0, 1),
+(5, 'Fanta', 10, 4, 1),
+(6, 'Sabritas de limón', 12, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -50,11 +55,11 @@ INSERT INTO `articulos` (`id_articulo`, `nombre`, `precio_venta`, `disponibles`)
 --
 
 CREATE TABLE `ciudades` (
-  `id_pais` char(4) NOT NULL,
-  `id_estado` char(4) NOT NULL,
-  `id_ciudad` char(4) NOT NULL,
-  `nombre` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de ciudes';
+  `id_pais` char(4) CHARACTER SET utf8 NOT NULL,
+  `id_estado` char(4) CHARACTER SET utf8 NOT NULL,
+  `id_ciudad` char(4) CHARACTER SET utf8 NOT NULL,
+  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla de ciudes';
 
 --
 -- Volcado de datos para la tabla `ciudades`
@@ -63,6 +68,7 @@ CREATE TABLE `ciudades` (
 INSERT INTO `ciudades` (`id_pais`, `id_estado`, `id_ciudad`, `nombre`) VALUES
 ('1', '1', '1', 'Saltillo'),
 ('2', '1', '1', 'Houston'),
+('3', '1', '1', 'Brasilia'),
 ('1', '2', '1', 'Monterrey');
 
 -- --------------------------------------------------------
@@ -87,7 +93,8 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `paterno`, `materno`, `genero`, `telefono`, `id_direccion`) VALUES
 (1, 'Juan', 'Perez', 'Rodriguez', 'M', '8442861111', 1),
-(2, 'Maria', 'Lopez', 'Hernandez', 'F', '8441232134', 4);
+(2, 'Maria', 'Lopez', 'Hernandez', 'F', '8441232134', 4),
+(3, 'Pancho', 'Rodriguez', 'Mata', 'M', '', 10);
 
 -- --------------------------------------------------------
 
@@ -110,6 +117,7 @@ CREATE TABLE `colonias` (
 INSERT INTO `colonias` (`id_pais`, `id_estado`, `id_ciudad`, `id_colonia`, `nombre`) VALUES
 ('1', '1', '1', '1', 'Zona Centro'),
 ('2', '1', '1', '1', 'Pasadena'),
+('3', '1', '1', '1', 'SHCS'),
 ('1', '2', '1', '1', 'Guadalupe');
 
 -- --------------------------------------------------------
@@ -132,7 +140,10 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`id_compra`, `id_proveedor`, `id_empleado`, `fecha`, `importe`, `iva`) VALUES
-(1, 1, 1, '2017-10-25', 20, 0);
+(1, 1, 1, '2017-10-25', 20, 0),
+(2, 1, 1, '2017-11-14', 3, 0),
+(3, 1, 1, '2017-11-15', 3, 0),
+(4, 2, 1, '2017-11-15', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -152,7 +163,12 @@ CREATE TABLE `comprasarticulos` (
 --
 
 INSERT INTO `comprasarticulos` (`id_compraArticulo`, `id_articulo`, `id_compra`, `precio_compra`) VALUES
-(1, 2, 1, 10);
+(1, 2, 1, 10),
+(2, 2, 2, 1),
+(3, 2, 2, 1),
+(4, 5, 3, 1),
+(5, 5, 3, 1),
+(6, 5, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -182,7 +198,10 @@ INSERT INTO `direcciones` (`id_direccion`, `id_pais`, `id_estado`, `id_ciudad`, 
 (4, '1', '2', '1', '1', '25', '140', ''),
 (5, '1', '1', '1', '1', 'Sauce', '100', ''),
 (6, '1', '2', '1', '1', 'Alamo', '123', NULL),
-(7, '2', '1', '1', '1', 'abc', '14', NULL);
+(7, '2', '1', '1', '1', 'abc', '14', NULL),
+(8, '1', '1', '1', '1', 'Zaragoza', '12', '2'),
+(9, '1', '1', '1', '1', 'olmo', '23', '1'),
+(10, '3', '1', '1', '1', 'vaoi', '12', '');
 
 -- --------------------------------------------------------
 
@@ -199,17 +218,18 @@ CREATE TABLE `empleados` (
   `telefono` varchar(15) NOT NULL,
   `id_direccion` int(10) NOT NULL,
   `usuario` varchar(40) NOT NULL,
-  `contrasena` varchar(100) NOT NULL
+  `contrasena` varchar(100) NOT NULL,
+  `admin` char(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id_empleado`, `nombre`, `paterno`, `materno`, `genero`, `telefono`, `id_direccion`, `usuario`, `contrasena`) VALUES
-(1, 'Diego', 'Padilla', 'Bernal', 'M', '8442831681', 7, 'dbernal', '$2y$10$P1XFvSVAe/hriRqxQ5lQJe.g2flkUpuFDAMF6kXC6Psafh8hfhPAC'),
-(2, 'Pedro', 'Palacios', 'Martinez', 'M', '844123123', 1, '', ''),
-(3, 'Alicia', 'Salas', 'Bustos', 'F', '8441234567', 1, 'usuario', '$2y$10$1wCWtKc0q9aUd/gDidDhI.41CEAM/WQZKxQOgK3YdJ/xTaKl3peHK');
+INSERT INTO `empleados` (`id_empleado`, `nombre`, `paterno`, `materno`, `genero`, `telefono`, `id_direccion`, `usuario`, `contrasena`, `admin`) VALUES
+(1, 'Diego', 'Padilla', 'Bernal', 'M', '8442831681', 7, 'dbernal', '$2y$10$P1XFvSVAe/hriRqxQ5lQJe.g2flkUpuFDAMF6kXC6Psafh8hfhPAC', '1'),
+(2, 'Pedro', 'Palacios', 'Martinez', 'M', '844123123', 1, '', '', '0'),
+(5, 'selena', 'cazarez', 'medina', 'F', '8441574317', 9, 'selena', '$2y$10$XlWOMT0iaf12it31.7nK4O260ldBXUkb71JcpnDJtb6PNc8RzncMm', '0');
 
 -- --------------------------------------------------------
 
@@ -230,6 +250,7 @@ CREATE TABLE `estados` (
 INSERT INTO `estados` (`id_pais`, `id_estado`, `nombre`) VALUES
 ('1', '1', 'Coahuila'),
 ('2', '1', 'Texas'),
+('3', '1', 'Distrito Federal'),
 ('1', '2', 'Nuevo León');
 
 -- --------------------------------------------------------
@@ -239,10 +260,10 @@ INSERT INTO `estados` (`id_pais`, `id_estado`, `nombre`) VALUES
 --
 
 CREATE TABLE `paises` (
-  `id_pais` char(4) NOT NULL,
-  `codigo` varchar(2) NOT NULL,
-  `nombre` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de paises';
+  `id_pais` char(4) CHARACTER SET utf8 NOT NULL,
+  `codigo` varchar(2) CHARACTER SET utf8 NOT NULL,
+  `nombre` varchar(40) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Tabla de paises';
 
 --
 -- Volcado de datos para la tabla `paises`
@@ -250,7 +271,8 @@ CREATE TABLE `paises` (
 
 INSERT INTO `paises` (`id_pais`, `codigo`, `nombre`) VALUES
 ('1', '', 'México'),
-('2', '', 'Estados Unidos');
+('2', '', 'Estados Unidos'),
+('3', '', 'Brasil');
 
 -- --------------------------------------------------------
 
@@ -270,7 +292,7 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`id_proveedor`, `id_direccion`, `nombre`, `telefono`) VALUES
-(1, 1, 'Magna', '123123213'),
+(1, 1, 'The Coca-Cola Company', '123123213'),
 (2, 5, 'Gamesa', '12312344'),
 (3, 6, 'Sabritas', '4441231');
 
@@ -295,7 +317,9 @@ CREATE TABLE `ventas` (
 
 INSERT INTO `ventas` (`id_venta`, `id_empleado`, `id_cliente`, `fecha`, `importe`, `iva`) VALUES
 (1, 1, 1, '2017-10-11', 100, 20.5),
-(2, 1, 1, '2017-10-18', 12, 1.44);
+(2, 1, 1, '2017-10-18', 12, 1.44),
+(3, 5, 2, '2017-11-07', 24, 2.88),
+(4, 1, 1, '2017-11-15', 20, 2.4);
 
 -- --------------------------------------------------------
 
@@ -317,7 +341,12 @@ INSERT INTO `ventasarticulos` (`id_ventaArticulo`, `id_articulo`, `id_venta`) VA
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 2),
-(4, 1, 2);
+(4, 1, 2),
+(5, 1, 4),
+(6, 1, 4),
+(7, 1, 4),
+(8, 1, 4),
+(9, 1, 4);
 
 --
 -- Índices para tablas volcadas
@@ -327,7 +356,8 @@ INSERT INTO `ventasarticulos` (`id_ventaArticulo`, `id_articulo`, `id_venta`) VA
 -- Indices de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  ADD PRIMARY KEY (`id_articulo`);
+  ADD PRIMARY KEY (`id_articulo`),
+  ADD KEY `FK_articulos_proveedores` (`id_proveedor`);
 
 --
 -- Indices de la tabla `ciudades`
@@ -424,32 +454,32 @@ ALTER TABLE `ventasarticulos`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
-  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cliente` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `comprasarticulos`
 --
 ALTER TABLE `comprasarticulos`
-  MODIFY `id_compraArticulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_compraArticulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `direcciones`
 --
 ALTER TABLE `direcciones`
-  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_empleado` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
@@ -459,15 +489,21 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `ventasarticulos`
 --
 ALTER TABLE `ventasarticulos`
-  MODIFY `id_ventaArticulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ventaArticulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `articulos`
+--
+ALTER TABLE `articulos`
+  ADD CONSTRAINT `FK_articulos_proveedores` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id_proveedor`);
 
 --
 -- Filtros para la tabla `ciudades`

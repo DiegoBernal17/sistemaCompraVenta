@@ -29,7 +29,7 @@ class comprasController {
     echo '<input type="hidden" id="pid" value="'.$id.'">';
     echo '<input type="hidden" id="eid" value="'.ID_EMPLEADO.'">';
     $articulo = new Articulo();
-    return $articulo->toList();
+    return $articulo->toList($id);
   }
 
   public function view($id) {

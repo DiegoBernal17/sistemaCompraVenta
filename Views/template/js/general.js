@@ -24,6 +24,21 @@ var addItem = function () {
     }
 };
 
+var select = document.getElementById('myItems');
+var select2 = document.getElementById('myItemsPrice');
+select.addEventListener('click',
+  function(){
+    var size = parseInt($("#myItems").attr("size"));
+    if(size > 1) {
+      var selectedOption = this.options[select.selectedIndex];
+      select.remove(selectedOption);
+      if(select2 != null)
+      select2.remove(selectedOption);
+      $("#myItems").attr("size", size-1);
+      $("#myItemsPrice").attr("size", size-1);
+    }
+  });
+
 var updateItem = function () {
     var item_id = $("#allItems").val();
 
@@ -45,25 +60,6 @@ var addItem2 = function() {
     $("#itemsTotal").attr("value", itemsTotal);
 }
 
-var addItem3 = function() {
-    var size = parseInt($("#myItems").attr("size"))+1;
-    $("#myItems").attr("size", size);
-    var itemVal = 0;
-    var itemText = $("#newItemName").val();
-    $("#myItems").append('<option class="myItem'+(size-2)+'" value="'+itemVal+'">'+itemText+'</option>');
-    var itemsTotal = parseInt($("#itemsTotal").val())+1;
-    $("#itemsTotal").attr("value", itemsTotal);
-
-    var size = parseInt($("#myItemsPrice").attr("size"))+1;
-    var price = $("#ItemCountBuy").val();
-
-    $("#myItemsPrice").attr("size", size);
-    var itemVal = $("#allItems").val();
-    $("#myItemsPrice").append('<option class="myItemsPrice'+(size-2)+'" value="'+price+'">$'+price+'</option>');
-    var itemsTotal = parseInt($("#itemsTotal").val())+1;
-    $("#itemsTotal").attr("value", itemsTotal);
-}
-
 var amount = 0;
 var iva;
 
@@ -75,8 +71,10 @@ var confirmSale = function () {
     var str,str2;
     amount=0;
     iva=0;
+    var select = document.getElementById('myItems');
     for(var i=0; i<items; i++) {
-        str = $(".myItem"+i).text();
+        str = select.options[i].text;
+        console.log(str);
         str2 = str.split("$");
         amount += parseInt(str2[1])
     }
@@ -99,9 +97,10 @@ var addSale = function () {
   $.cliente_id = $("#cid").val();
   $.empleado_id = $("#eid").val();
   var items = [];
-  for(var i=0; i<$("select#myItems option").length; i++)
+  var select = document.getElementById('myItems');
+  for(var i=0; i<select.length; i++)
   {
-    items.push($(".myItem"+i).val());
+    items.push(select.options[i].value);
   }
   $.articulos = $("myItems").html();
   $.post(url+"functions/venta.php", { id_cliente: $.cliente_id, items: items, id_empleado: $.empleado_id, importe: amount, iva: iva })
@@ -122,8 +121,10 @@ var addSale = function () {
       $("#itemsTotalBuy").text(items);
       var str,str2;
       amount=0;
-      for(var i=0; i<items; i++) {
-          str = $(".myItemsPrice"+i).text();
+      var select2 = document.getElementById('myItemsPrice');
+      for(var i=0; i<select2.length; i++) {
+          str = select2.options[i].text;
+          console.log(str);
           str2 = str.split("$");
           amount += parseInt(str2[1]);
       }
@@ -136,14 +137,16 @@ var addSale = function () {
     $.proveedor_id = $("#pid").val();
     $.empleado_id = $("#eid").val();
     var items = [];
-    for(var i=0; i<$("select#myItems option").length; i++)
+    var select = document.getElementById('myItems');
+    for(var i=0; i<select.length; i++)
     {
-      items.push($(".myItem"+i).val());
+      items.push(select.options[i].value);
     }
     var prices = [];
-    for(var i=0; i<$("select#myItemsPrice option").length; i++)
+    var select2 = document.getElementById('myItemsPrice');
+    for(var i=0; i<select2.length; i++)
     {
-      prices.push($(".myItemsPrice"+i).val());
+      prices.push(select2.options[i].value);
     }
 
     $.articulos = $("myItems").html();
@@ -209,19 +212,30 @@ var clearDir = function() {
 }
 
 var addNewItem = function() {
-  $("#allItems").attr("style", "display: none");
-  $("#newItemName").attr("style", "");
-  $("#addItem").attr("style", "display: none");
-  $("#addItem2").attr("style", "");
-  $("#addNewItem").attr("style", "display: none");
-  $("#viewAllItems").attr("style", "");
+  if($("#addNewItemBox").attr("style") == "") {
+    $("#addNewItemBox").attr("style", "display: none");
+  } else {
+    $("#addNewItemBox").attr("style", "");
+    var name = $("#item_name").val("");
+    var price = $("#item_price").val("");
+    $("#mensaje").text("");
+  }
 }
 
-var viewAllItems = function() {
-  $("#allItems").attr("style", "");
-  $("#newItemName").attr("style", "display: none");
-  $("#addItem").attr("style", "");
-  $("#addItem2").attr("style", "display: none");
-  $("#addNewItem").attr("style", "");
-  $("#viewAllItems").attr("style", "display: none");
+var addNewItemAdd = function() {
+  var name = $("#item_name").val();
+  var price = $("#item_price").val();
+  var pid = $("#pid").val();
+
+  $.post(url+"functions/addNewItem.php", { item_name: name, item_price: price, id_proveedor: pid })
+    .done(function( data ) {
+      if(parseInt(data) > 0) {
+        $("#mensaje").html('<b style="color: green">Articulo agregado.');
+        $("#allItems").append('<option id="it'+data+'" value="'+data+'">'+name+'</option>');
+        setTimeout(function() {
+          addNewItem();
+        }, 1500);
+      } else
+        $("#mensaje").html('<b style="color: red">Error al agregar articulo</b>');
+  });
 }

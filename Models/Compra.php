@@ -15,7 +15,8 @@ class Compra {
     $sql = "SELECT c.*, p.nombre as p_nombre, e.nombre as e_nombre, e.paterno as e_paterno, e.materno as e_materno
             FROM compras c
             INNER JOIN empleados e ON c.id_empleado = e.id_empleado
-            INNER JOIN proveedores p ON c.id_proveedor = p.id_proveedor ";
+            INNER JOIN proveedores p ON c.id_proveedor = p.id_proveedor
+            ORDER BY c.id_compra DESC";
     return $this->con->returnQuery($sql);
   }
 

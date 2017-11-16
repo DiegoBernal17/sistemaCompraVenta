@@ -24,9 +24,14 @@ echo $_GET['id'] ?>
 								$<input type="num" id="ItemCountBuy" value="1" style="width: 36px">
 								<a id="countAddItem" class="btn btn-default disabled">1</a>
 								<a class="btn btn-success" id="addItem" onclick="addItem2()">+</a>
-								<a class="btn btn-success" id="addItem2" onclick="addItem3()" style="display: none">+</a>
 								<a id="addNewItem" href="#" onclick="addNewItem();">Agregar artículo nuevo</a>
-								<a id="viewAllItems" href="#" onclick="viewAllItems();" style="display: none">Ver articulos registrados</a>
+								<div id="addNewItemBox" style="display: none">
+									Nuevo articulo: <br>
+									<input type="text" placeholder="Nombre articulo" id="item_name" style="width: 140px">
+									$<input type="text" placeholder="Precio venta" id="item_price" style="width: 87px">
+									<a class="btn btn-primary btn-sm" href="#" onclick="addNewItemAdd();">Agregar</a>
+									<p id="mensaje"></p>
+								</div>
 							</div>
 						 <hr>
              Articulos en espera de compra:

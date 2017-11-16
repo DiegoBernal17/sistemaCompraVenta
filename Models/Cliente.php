@@ -21,7 +21,7 @@ class Cliente {
             INNER JOIN ciudades c ON c.id_pais = col.id_pais AND c.id_estado = col.id_estado AND c.id_ciudad = col.id_ciudad
             INNER JOIN estados e ON e.id_pais = c.id_pais AND e.id_estado = c.id_estado
             INNER JOIN paises p ON p.id_pais = e.id_pais
-            ORDER BY cl.id_cliente ASC";
+            ORDER BY cl.id_cliente DESC";
     return $this->con->returnQuery($sql);
   }
 

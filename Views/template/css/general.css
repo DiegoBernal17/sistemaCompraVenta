@@ -89,5 +89,31 @@ footer {
 
 .items {
   width: 56%;
-  display: inline-block; 
+  display: inline-block;
+}
+
+#addNewItemBox {
+  background-color: #f8f8f8;
+  padding: 7px;
+}
+
+.login {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 8px;
+  display: inline-block;
+}
+
+.imgUsername {
+  background-image: url(../images/username.png);
+}
+
+.imgPassword {
+  background-image: url(../images/password.png);
+}
+
+#email, #password {
+  display: inline-block;
+  width: 82%;
 }

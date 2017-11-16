@@ -4,14 +4,21 @@ class Articulo {
   private $id_articulo;
   private $nombre;
   private $precio_venta;
-  //private $disponibles;
+  private $id_proveedor;
 
   public function __construct() {
     $this->con = new Connection();
   }
 
-  public function toList() {
-    $sql = "SELECT * FROM articulos";
+  public function toList($id_proveedor = "") {
+    if($id_proveedor == "") {
+      $sql = "SELECT a.*, p.nombre AS p_nombre
+              FROM articulos a
+              INNER JOIN proveedores p ON a.id_proveedor = p.id_proveedor
+              ORDER BY a.id_articulo DESC";
+    } else {
+      $sql = "SELECT * FROM articulos WHERE id_proveedor = {$id_proveedor} ORDER BY id_articulo DESC";
+    }
     return $this->con->returnQuery($sql);
   }
 
@@ -21,22 +28,27 @@ class Articulo {
   }
 
   public function add() {
-    $sql = "INSERT INTO articulos (id_articulo,nombre,precio_venta,disponibles)
-            VALUES (NULL, '{$this->nombre}', '{$this->precio_venta}', '0');";
+    $sql = "INSERT INTO articulos (id_articulo,nombre,precio_venta,disponibles,id_proveedor)
+            VALUES (NULL, '{$this->nombre}', '{$this->precio_venta}', '0', '{$this->id_proveedor}');";
     $this->con->simpleQuery($sql);
   }
 
   public function view() {
-    $sql = "SELECT * FROM articulos WHERE id_articulo = '{$this->id_articulo}'";
+    $sql = "SELECT a.*, p.nombre AS p_nombre
+            FROM articulos a
+            INNER JOIN proveedores p ON a.id_proveedor = p.id_proveedor
+            WHERE a.id_articulo = '{$this->id_articulo}'";
     return mysqli_fetch_array($this->con->returnQuery($sql));
   }
 
+  public function countItem() {
+    $sql = $con->returnQuery("SELECT disponibles FROM articulos WHERE id_articulo = '{$this->id_articulo}'");
+    $itemCount = mysqli_fetch_array($sql);
+    return $itemCount[0];
+  }
+
   public function update() {
-<<<<<<< HEAD
     $sql = "UPDATE articulos SET nombre = '{$this->nombre}', precio_venta = '{$this->precio_venta}'
-=======
-    $sql = "UPDATE FROM articulos SET nombre = '{$this->nombre}', precio_venta = {$this->precio_venta}
->>>>>>> d33634a8b9718bd8879fde75dabe8bb8df0b64ba
             WHERE id_articulo = '{$this->id_articulo}'";
     $this->con->simpleQuery($sql);
   }
