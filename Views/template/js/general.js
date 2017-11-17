@@ -24,21 +24,6 @@ var addItem = function () {
     }
 };
 
-var select = document.getElementById('myItems');
-var select2 = document.getElementById('myItemsPrice');
-select.addEventListener('click',
-  function(){
-    var size = parseInt($("#myItems").attr("size"));
-    if(size > 1) {
-      var selectedOption = this.options[select.selectedIndex];
-      select.remove(selectedOption);
-      if(select2 != null)
-      select2.remove(selectedOption);
-      $("#myItems").attr("size", size-1);
-      $("#myItemsPrice").attr("size", size-1);
-    }
-  });
-
 var updateItem = function () {
     var item_id = $("#allItems").val();
 
@@ -160,9 +145,9 @@ var addSale = function () {
     }
 
 var showStates = function() {
-  $.pais = $("#pais").val();
-  if($.pais != "") {
-    $.post(url+"functions/estados.php", { id_pais: $.pais })
+  var pais = $("#pais").val();
+  if(pais != "") {
+    $.post(url+"functions/estados.php", { id_pais: pais })
       .done(function( data ) {
         $("#estado").html(data);
       });

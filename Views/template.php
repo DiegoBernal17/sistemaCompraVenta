@@ -107,6 +107,9 @@
 	<script src="<?php echo URL; ?>Views/template/js/bootstrap.js"></script>
   <script src="<?php echo URL; ?>Views/template/js/jquery-3.2.1.js"></script>
   <script src="<?php echo URL; ?>Views/template/js/general.js"></script>
+  <?php if(ARTICLES_RM) { ?>
+  <script src="<?php echo URL; ?>Views/template/js/articles_rm.js"></script>
+  <?php } ?>
 	</body>
 	</html>
 

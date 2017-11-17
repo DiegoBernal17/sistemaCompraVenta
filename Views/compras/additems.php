@@ -1,6 +1,7 @@
 <?php
 $id = explode("/",  $_SERVER["REQUEST_URI"]);
-echo $_GET['id'] ?>
+define('ARTICLES_RM',true);
+?>
 
 <div class="box-principal">
 <h3 class="titulo">Agrega articulos<hr></h3>

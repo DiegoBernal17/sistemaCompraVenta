@@ -23,7 +23,7 @@
                 <td><?php echo $row['id_articulo']; ?></td>
                 <td><?php echo $row['nombre']; ?></td>
                 <td>$ <?php echo $row['precio_venta']; ?></td>
-                <td><a href="<?php echo $row['id_proveedor']; ?>"><?php echo $row['p_nombre']; ?></a></td>
+                <td><a href="<?php echo URL; ?>proveedores/view/<?php echo $row['id_proveedor']; ?>"><?php echo $row['p_nombre']; ?></a></td>
                 <td><?php echo $row['disponibles']; ?></td>
                 <td><a class="btn btn-warning btn-sm" href="<?php echo URL; ?>articulos/edit/<?php echo $row['id_articulo']; ?>">Editar</a></td>
               </tr>

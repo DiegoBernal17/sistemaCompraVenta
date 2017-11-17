@@ -1,5 +1,6 @@
 <?php
-$id = explode("/",  $_SERVER["REQUEST_URI"]); ?>
+$id = explode("/",  $_SERVER["REQUEST_URI"]);
+define('ARTICLES_RM',true); ?>
 
 <div class="box-principal">
 <h3 class="titulo">Agrega articulos<hr></h3>
